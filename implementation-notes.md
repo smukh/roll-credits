@@ -26,4 +26,4 @@
 - Added deterministic session statistics, fictional demo, motion-free view, and text output.
 - Verified 18 tests through Claude's official runtime, strict types, and both manifests.
 - Verified the real CLI command with no model call or login.
-- Prepared MIT-licensed source for the user-selected public repository smukh/roll-credits.
+- Published smukh/roll-credits; GitHub CI passed and a fresh marketplace install produced the expected CLI demo.

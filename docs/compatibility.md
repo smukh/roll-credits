@@ -38,3 +38,15 @@ A plugin-origin call starts below its own hook layer. Consequently, the close bu
 - Actual CLI smoke: `claude --plugin-dir ... --no-session-persistence -p '/credits demo --text'` returned the complete credits with exit status 0. See [demo.txt](demo.txt).
 
 The interactive CLI was also launched, but stopped at its account sign-in screen. No signed-in interactive screenshot is claimed. Native pane behavior is verified through Claude's official render and button test engine; pixel appearance in an authenticated terminal remains a manual check.
+
+## Published installation check
+
+On 2026-09-15, a fresh isolated Claude configuration successfully installed from the public GitHub repository:
+
+```sh
+claude plugin marketplace add smukh/roll-credits
+claude plugin install roll-credits@roll-credits-marketplace
+CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1 claude --no-session-persistence -p '/credits demo --text' < /dev/null
+```
+
+The installed plugin was enabled at version 0.1.0, and its output matched `docs/demo.txt` byte for byte. Standard input was closed so Claude would not append piped text to the command arguments. The [initial GitHub CI run](https://github.com/smukh/roll-credits/actions/runs/35003477133) also passed all checks, including 18 official-runtime tests, on Linux.
