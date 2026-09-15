@@ -1,0 +1,29 @@
+roll-credits: DEMO · FICTIONAL SESSION
+the-little-launch
+
+DIRECTED BY
+You
+WRITTEN WITH
+Claude
+
+STARRING
+App.tsx
+8 successful edit calls
+
+SUPPORTING CAST
+stars.ts · 3 edits
+README.md · 2 edits
+
+SPECIAL THANKS
+Read · Edit · Bash · Write
+
+BY THE NUMBERS
+42 tool calls · 7 completed turns
+12m 34s together · 2 plot twists
+
+POST-CREDITS SCENE
+The bugs have signed on for a sequel.
+
+THE END
+Made with patience. And a few tool calls.
+Sample data only.

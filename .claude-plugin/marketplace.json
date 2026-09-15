@@ -1,0 +1,17 @@
+{
+  "name": "roll-credits-marketplace",
+  "owner": {
+    "name": "smukh"
+  },
+  "plugins": [
+    {
+      "name": "roll-credits",
+      "source": "./",
+      "description": "Movie-style credits for your Claude Code session",
+      "version": "0.1.0"
+    }
+  ],
+  "metadata": {
+    "description": "Install Roll Credits, a small native Claude Mod."
+  }
+}

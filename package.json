@@ -1,0 +1,25 @@
+{
+  "name": "roll-credits",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A native Claude Mod that rolls movie credits for your coding session",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "types:fetch": "node scripts/fetch-types.mjs",
+    "typecheck": "tsc -p .",
+    "validate": "node scripts/claude.mjs plugin validate .claude-plugin/plugin.json && node scripts/claude.mjs plugin validate .claude-plugin/marketplace.json",
+    "test": "node scripts/claude.mjs plugin test .",
+    "check": "npm run format:check && npm run typecheck && npm run validate && npm test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@anthropic-ai/claude-code": "2.1.272",
+    "prettier": "3.6.2",
+    "typescript": "5.9.3"
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "description": "Observe session activity and register the native /credits pane.",
+  "modules": ["./register.tsx"]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "roll-credits",
+  "version": "0.1.0",
+  "description": "Movie-style closing credits for your Claude Code session. A native Claude Mod with local, deterministic statistics.",
+  "author": { "name": "smukh" },
+  "homepage": "https://github.com/smukh/roll-credits",
+  "repository": "https://github.com/smukh/roll-credits",
+  "license": "MIT",
+  "keywords": ["claude-mod", "credits", "fun", "session"]
+}
