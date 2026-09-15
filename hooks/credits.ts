@@ -84,7 +84,7 @@ export function credits(
   add(
     cast[0]
       ? `${cast[0][1]} successful edit calls`
-      : 'Every great project starts somewhere.',
+      : 'No successful edits yet.',
     'muted',
   );
   if (cast.length > 1) {

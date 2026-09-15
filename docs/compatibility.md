@@ -1,8 +1,6 @@
 # Claude Mods compatibility
 
-## Source of truth
-
-Researched against Anthropic's published implementation, not a guessed SDK:
+## API references
 
 - [Mods README at the pinned revision](https://github.com/anthropics/claude-code/blob/f96c3b49c4c8721685206aaab23609b2d399df4e/mods/README.md): module format, testing, and early-access limits.
 - [Official API declarations](https://github.com/anthropics/claude-code/blob/f96c3b49c4c8721685206aaab23609b2d399df4e/mods/types/claude-code.d.ts): exact hooks, command, clock, and native UI contracts. Header identifies Claude Code 2.1.271.
@@ -11,7 +9,7 @@ Researched against Anthropic's published implementation, not a guessed SDK:
 
 Development runtime: `@anthropic-ai/claude-code@2.1.272`. Declarations SHA-256: `69d14af889cae22568b6051382e72971578156b36479d4ce4ad13f473797d4ac`.
 
-Mods require `CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1`. Anthropic describes this API as early access and subject to changes without notice. Version 2.1.272 is the tested version, not a promise of compatibility with every earlier or future release.
+Mods require `CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1`. Anthropic describes this API as early access and subject to changes without notice. Compatibility has been tested with version 2.1.272.
 
 ## Integration choices
 
@@ -28,25 +26,20 @@ Mods require `CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1`. Anthropic describes this API
 | Motion              | One row every 650 ms; finite roll; still mode cancels the clock                               |
 | Persistence         | None; per-loaded-module state, no transcript replay                                           |
 
-A plugin-origin call starts below its own hook layer. Consequently, the close button must clean up after its `$.ui.close` call; relying only on the Mod's `ui.close` hook leaves its timer running. The official test harness caught this and verifies both paths.
+A plugin-origin call starts below its own hook layer. Consequently, the close button must clean up after its `$.ui.close` call; relying only on the Mod's `ui.close` hook leaves its timer running. Tests cover both close paths.
 
-## Verification scope
+## Testing
 
-- Strict TypeScript check against pinned official declarations.
-- Official `claude plugin validate` for the plugin and marketplace; the plugin validator reports the loaded module's actual hooks and capabilities.
-- Official `claude plugin test` at user tier: command registration, successful/failed/denied edits, passthrough behavior, native pane rendering and button dispatch, timer cancellation/completion, noninteractive and denied-UI fallback, and deterministic formatting.
-- Actual CLI smoke: `claude --plugin-dir ... --no-session-persistence -p '/credits demo --text'` returned the complete credits with exit status 0. See [demo.txt](demo.txt).
+`npm run check` runs formatting, strict TypeScript checks, Claude's plugin and marketplace validators, and 18 tests in `claude plugin test` at the user tier. The tests cover command registration, tool accounting, event passthrough, native render trees, button presses, timers, and text fallback.
 
-The interactive CLI was also launched, but stopped at its account sign-in screen. No signed-in interactive screenshot is claimed. Native pane behavior is verified through Claude's official render and button test engine; pixel appearance in an authenticated terminal remains a manual check.
+A fresh marketplace installation of version 0.1.0 produced the output in [demo.txt](demo.txt). [GitHub Actions](https://github.com/smukh/roll-credits/actions) runs the checks on Linux.
 
-## Published installation check
+Native pane behavior is covered by the render and button test harness. Appearance in a signed-in interactive terminal has not been manually verified.
 
-On 2026-09-15, a fresh isolated Claude configuration successfully installed from the public GitHub repository:
+To check an installed copy without sending a model request:
 
 ```sh
-claude plugin marketplace add smukh/roll-credits
-claude plugin install roll-credits@roll-credits-marketplace
 CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1 claude --no-session-persistence -p '/credits demo --text' < /dev/null
 ```
 
-The installed plugin was enabled at version 0.1.0, and its output matched `docs/demo.txt` byte for byte. Standard input was closed so Claude would not append piped text to the command arguments. The [initial GitHub CI run](https://github.com/smukh/roll-credits/actions/runs/35003477133) also passed all checks, including 18 official-runtime tests, on Linux.
+Closing standard input prevents Claude from appending piped text to the command arguments.

@@ -1,18 +1,16 @@
 # Roll Credits 🎬
 
-**Every coding session deserves an ending.**
-
-A small, open-source **Claude Mod** that turns your session into movie credits. Your most-edited file gets top billing. Your tools get a thank-you. Your errors become plot twists.
+A Claude Mod that turns your coding session into movie credits. Your most-edited file gets top billing, tools get a thank-you, and failed calls become plot twists.
 
 ```text
 /credits demo
 ```
 
-Native pane. Scrolling credits. Still / Play, Replay, and Close buttons. No backend, model calls, runtime dependencies, or telemetry.
+Credits scroll in a native pane with Still / Play, Replay, and Close controls. Everything runs locally, without model calls or telemetry.
 
 ## Install
 
-**Requires Claude Code with early-access function hooks enabled.** Tested with **2.1.272**. This API is experimental; being a regular Claude plugin alone does not enable Mods.
+**Requires Claude Code with early-access function hooks enabled.** Tested with **2.1.272**. The Mods API is experimental.
 
 ```sh
 claude plugin marketplace add smukh/roll-credits
@@ -29,7 +27,7 @@ git clone https://github.com/smukh/roll-credits.git
 CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1 claude --plugin-dir ./roll-credits
 ```
 
-If `/credits` is missing, check `claude --version`, restart with the flag, and inspect `/plugin` for load errors. Another plugin already owning `/credits` takes precedence; Roll Credits stands down.
+If `/credits` is missing, check `claude --version`, restart with the flag, and inspect `/plugin` for load errors. Another plugin already owning `/credits` takes precedence; Roll Credits leaves that command unchanged.
 
 ## Commands
 
@@ -45,9 +43,9 @@ If `/credits` is missing, check `claude --version`, restart with the flag, and i
 
 Put options before the title. The pane opens only when requested. Use its buttons to switch to a still view, replay, or close; Escape closes it while it has focus. At the end, animation stops automatically. Each invocation takes a snapshot, so edits during the roll don't move the cast around.
 
-### A little taste
+### Demo
 
-Excerpt from the **real Claude CLI** running `/credits demo --text`:
+Output from `/credits demo --text`:
 
 ```text
 STARRING
@@ -71,7 +69,7 @@ The bugs have signed on for a sequel.
 
 The demo is fictional. [Complete CLI output](docs/demo.txt).
 
-## An actual Claude Mod
+## How it works
 
 This uses Anthropic's published [Mods integration](https://github.com/anthropics/claude-code/tree/main/mods):
 
@@ -82,7 +80,7 @@ This uses Anthropic's published [Mods integration](https://github.com/anthropics
 - `$.ui.open`, `ui.render`, and `$.ui.resolve` render a native pane using Claude's `Box`, `Text`, and `Button` elements.
 - `$.clock.every` drives the roll; timers stop on still mode, close, or completion.
 
-The Mod has no shell-hook wrapper, MCP server, browser UI, React dependency, or external API. The only executable runtime files are under `hooks/`. [Exact API sources and validation evidence →](docs/compatibility.md)
+Runtime code is in `hooks/`. See [API references and compatibility](docs/compatibility.md).
 
 ## What the credits count
 
@@ -108,6 +106,6 @@ npm run check
 
 The type-fetch step downloads a checksum-verified declaration file from a pinned Anthropic commit into gitignored `.api/`. Anthropic's reference source has its own license; it is not republished under this project's MIT license.
 
-`npm test` runs **Claude's own `claude plugin test` harness**, loading the shipped module at the normal user tier. Tests exercise real dispatch, capability auditing, native render-tree validation, button presses, and clock behavior. `npm run validate` checks both manifests and inventories module hooks and capabilities.
+`npm test` runs `claude plugin test` at the user tier. Tests cover event dispatch, native rendering, button presses, and timers. `npm run validate` checks the plugin and marketplace manifests.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). MIT licensed. Independent community project; not affiliated with Anthropic.

@@ -154,7 +154,7 @@ describe('register', () => {
     await world.clock.advance(5000);
     expect(world.invalidations()).toEqual(closedCount);
   });
-  test('animation ends naturally and demo never contaminates real statistics', async ($, on) => {
+  test('animation stops at the end and demo leaves session counters unchanged', async ($, on) => {
     const world = setup(on);
     await $.session.start(SESSION);
     await $.command.run({ ...COMMAND, args: 'demo' });
