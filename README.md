@@ -1,5 +1,15 @@
 # Roll Credits 🎬
 
+[![Format: Claude Mod](https://img.shields.io/badge/format-Claude_Mod-7c3aed?style=flat-square)](https://github.com/anthropics/claude-code/tree/main/mods)
+[![Version](https://img.shields.io/github/package-json/v/smukh/roll-credits?style=flat-square&label=version&color=dd6b20)](https://github.com/smukh/roll-credits/blob/main/.claude-plugin/plugin.json)
+[![License: MIT](https://img.shields.io/github/license/smukh/roll-credits?style=flat-square&color=65a30d)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/smukh/roll-credits/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/smukh/roll-credits/actions/workflows/ci.yml)
+[![GitHub stars](https://img.shields.io/github/stars/smukh/roll-credits?style=flat-square&logo=github&label=stars&color=0284c7)](https://github.com/smukh/roll-credits/stargazers)
+[![Tested with Claude Code 2.1.272](https://img.shields.io/badge/Claude_Code-2.1.272-cc785c?style=flat-square&label=tested%20with)](docs/compatibility.md)
+[![Status: early access](https://img.shields.io/badge/status-early_access-d97706?style=flat-square)](docs/compatibility.md)
+
+[![Subscribe: Web After AI](https://img.shields.io/badge/Subscribe-Web_After_AI-ff6719?style=flat-square&logo=substack&logoColor=white)](https://webafterai.substack.com/)
+
 A Claude Mod that turns your coding session into movie credits. Your most-edited file gets top billing, tools get a thank-you, and failed calls become plot twists.
 
 ```text
@@ -7,6 +17,12 @@ A Claude Mod that turns your coding session into movie credits. Your most-edited
 ```
 
 Credits scroll in a native pane with Still / Play, Replay, and Close controls. Everything runs locally, without model calls or telemetry.
+
+## Launch preview
+
+[![Watch the Roll Credits launch preview](docs/launch-preview.png)](docs/roll-credits-launch.mp4)
+
+[Watch the 38-second video](docs/roll-credits-launch.mp4). This is a rendered UI preview using fictional demo data, not a live screen recording.
 
 ## Install
 
